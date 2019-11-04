@@ -12,15 +12,17 @@ from midiutil.MidiFile3 import MIDIFile
 staff_files = [
     "resources/template/staff/bar1.png", 
     "resources/template/staff/bar2.png", 
-    "resources/template/staff/bar3.png", 
-    "resources/template/staff.png", 
-    "resources/template/staff2.png", 
-    "resources/template/staff.png"]
+    "resources/template/staff/bar3.png",
+    "resources/template/staff/staff1.png",
+    "resources/template/staff/staff2.png"]
+    # "resources/template/staff.png", 
+    # "resources/template/staff2.png", 
+    # "resources/template/staff.png"]
 sharp_files = [
     "resources/template/sharp/sharp-line.png", 
     "resources/template/sharp/sharp-line2.png", 
-    "resources/template/sharp/sharp-space.png", 
-    "resources/template/sharp.png"]
+    "resources/template/sharp/sharp-space.png"]
+    # "resources/template/sharp.png"]
 natural_files = [
     "resources/template/natural/natural-line.png",  
     "resources/template/natural/natural-space.png"]
@@ -29,9 +31,9 @@ flat_files = [
     "resources/template/flat/flat-line2.png",
     "resources/template/flat/flat-line3.png",
     "resources/template/flat/flat-space.png", 
-    "resources/template/flat/flat-space2.png", 
-    "resources/template/flat-line.png", 
-    "resources/template/flat-space.png" ]
+    "resources/template/flat/flat-space2.png"]
+    # "resources/template/flat-line.png", 
+    # "resources/template/flat-space.png" ]
 eighth_rest_files = [
     "resources/template/rest/eighth.png"]
 quarter_rest_files = [
@@ -45,18 +47,18 @@ quarter_files = [
     "resources/template/solid-note.png"]
 half_files = [
     "resources/template/notes/half-line.png", 
-    "resources/template/notes/half-space.png",
-    "resources/template/half-space.png", 
-    "resources/template/half-note-line.png",
-    "resources/template/half-line.png", 
-    "resources/template/half-note-space.png"]
+    "resources/template/notes/half-space.png"]
+    # "resources/template/half-space.png", 
+    # "resources/template/half-note-line.png",
+    # "resources/template/half-line.png", 
+    # "resources/template/half-note-space.png"]
 whole_files = [
     "resources/template/notes/whole-line.png", 
-    "resources/template/notes/whole-space.png",
-    "resources/template/whole-space.png", 
-    "resources/template/whole-note-line.png",
-    "resources/template/whole-line.png", 
-    "resources/template/whole-note-space.png"]
+    "resources/template/notes/whole-space.png"]
+    # "resources/template/whole-space.png", 
+    # "resources/template/whole-note-line.png",
+    # "resources/template/whole-line.png", 
+    # "resources/template/whole-note-space.png"]
 
 staff_imgs = [cv2.imread(staff_file, 0) for staff_file in staff_files]
 sharp_imgs = [cv2.imread(sharp_files, 0) for sharp_files in sharp_files]
@@ -77,7 +79,7 @@ flat_lower, flat_upper, flat_thresh = 50, 150, 0.77
 eighth_rest_lower, eighth_rest_upper, eighth_rest_thresh = 50, 150, 0.70
 quarter_rest_lower, quarter_rest_upper, quarter_rest_thresh = 50, 150, 0.70
 half_rest_lower, half_rest_upper, half_rest_thresh = 50, 150, 0.80
-whole_rest_lower, whole_rest_upper, whole_rest_thresh = 50, 150, 0.80
+whole_rest_lower, whole_rest_upper, whole_rest_thresh = 50, 150, 0.85
 quarter_lower, quarter_upper, quarter_thresh = 50, 150, 0.70
 half_lower, half_upper, half_thresh = 50, 150, 0.70
 whole_lower, whole_upper, whole_thresh = 50, 150, 0.80
@@ -287,18 +289,19 @@ if __name__ == "__main__":
         note_color = (randint(0, 255), randint(0, 255), randint(0, 255))
         note_group = []
         i = 0; j = 0;
-        # while(i < len(staff_notes)):
-        #     if (staff_notes[i].rec.x > staffs[j].x and j < len(staffs)):
-        #         r = staffs[j]
-        #         j += 1;
-        #         if len(note_group) > 0:
-        #             note_groups.append(note_group)
-        #             note_group = []
-        #         note_color = (randint(0, 255), randint(0, 255), randint(0, 255))
-        #     else:
-        #         note_group.append(staff_notes[i])
-        #         staff_notes[i].rec.draw(img, note_color, 2)
-        #         i += 1
+        print(staff_notes)
+        while(i < len(staff_notes)):
+            if (staff_notes[i].rec.x > staffs[j].x and j < len(staffs)):
+                r = staffs[j]
+                j += 1;
+                if len(note_group) > 0:
+                    note_groups.append(note_group)
+                    note_group = []
+                note_color = (randint(0, 255), randint(0, 255), randint(0, 255))
+            else:
+                note_group.append(staff_notes[i])
+                staff_notes[i].rec.draw(img, note_color, 2)
+                i += 1
         note_groups.append(note_group)
 
     print(note_groups)
