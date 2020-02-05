@@ -1,5 +1,5 @@
 import cv2
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 def fit(img, templates, start_percent, stop_percent, threshold):
@@ -32,7 +32,7 @@ def fit(img, templates, start_percent, stop_percent, threshold):
             best_location_count = location_count
             best_locations = locations
             best_scale = scale
-            plt.axis([0, 2, 0, best_location_count])
+            # plt.axis([0, 2, 0, best_location_count])
         elif (location_count < best_location_count):
             pass
     # plt.close()

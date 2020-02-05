@@ -290,7 +290,7 @@ if __name__ == "__main__":
         note_group = []
         i = 0; j = 0;
         print(staff_notes)
-        while(i < len(staff_notes)):
+        while(i < len(staff_notes) and j < len(staffs)):
             if (staff_notes[i].rec.x > staffs[j].x and j < len(staffs)):
                 r = staffs[j]
                 j += 1;
@@ -337,7 +337,7 @@ if __name__ == "__main__":
     midi.addTempo(track, time, 140)
     
     for note_group in note_groups:
-        duration = None
+        duration = 0
         for note in note_group:
             note_type = note.sym
             if note_type == "1":
