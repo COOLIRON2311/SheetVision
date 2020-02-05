@@ -1,6 +1,9 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+#IDE files
+.vscode
+
 # Debug files
 flat_recs_img.png
 half_recs_img.png
