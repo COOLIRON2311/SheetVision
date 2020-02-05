@@ -111,7 +111,8 @@ def merge_recs(recs, threshold):
             merged = False
             i = 0
             for _ in range(len(recs)):
-                if r.overlap(recs[i]) > threshold or recs[i].overlap(r) > threshold:
+                if r.overlap(recs[i]) > threshold or \
+                     recs[i].overlap(r) > threshold:
                     r = r.merge(recs.pop(i))
                     merged = True
                 elif recs[i].distance(r) > r.w/2 + recs[i].w/2:
@@ -122,9 +123,11 @@ def merge_recs(recs, threshold):
     return filtered_recs
 
 
+'''
 def open_file(path):
     cmd = {'linux': 'eog', 'win32': 'explorer', 'darwin': 'open'}[sys.platform]
     # subprocess.run([cmd, path])
+'''
 
 
 if __name__ == "__main__":
@@ -152,7 +155,7 @@ if __name__ == "__main__":
     for r in staff_recs:
         r.draw(staff_recs_img, (0, 0, 255), 2)
     cv2.imwrite('staff_recs_img.png', staff_recs_img)
-    open_file('staff_recs_img.png')
+    # open_file('staff_recs_img.png')
 
     print("Discovering staff locations...")
     staff_boxes = merge_recs([Rectangle(0, r.y, img_width, r.h)
@@ -161,7 +164,7 @@ if __name__ == "__main__":
     for r in staff_boxes:
         r.draw(staff_boxes_img, (0, 0, 255), 2)
     cv2.imwrite('staff_boxes_img.png', staff_boxes_img)
-    open_file('staff_boxes_img.png')
+    # open_file('staff_boxes_img.png')
 
     print("Matching sharp image...")
     sharp_recs = locate_images(
@@ -173,7 +176,7 @@ if __name__ == "__main__":
     for r in sharp_recs:
         r.draw(sharp_recs_img, (0, 0, 255), 2)
     cv2.imwrite('sharp_recs_img.png', sharp_recs_img)
-    open_file('sharp_recs_img.png')
+    # open_file('sharp_recs_img.png')
 
     print("Matching natural image...")
     natural_recs = locate_images(
@@ -185,7 +188,7 @@ if __name__ == "__main__":
     for r in natural_recs:
         r.draw(natural_recs_img, (0, 0, 255), 2)
     cv2.imwrite('natural_recs_img.png', natural_recs_img)
-    open_file('natural_recs_img.png')
+    # open_file('natural_recs_img.png')
 
     print("Matching flat image...")
     flat_recs = locate_images(
@@ -197,11 +200,12 @@ if __name__ == "__main__":
     for r in flat_recs:
         r.draw(flat_recs_img, (0, 0, 255), 2)
     cv2.imwrite('flat_recs_img.png', flat_recs_img)
-    open_file('flat_recs_img.png')
+    # open_file('flat_recs_img.png')
 
     print("Matching eighth rest image...")
     eighth_rest_recs = locate_images(
-        img_gray, eighth_rest_imgs, eighth_rest_lower, eighth_rest_upper, eighth_rest_thresh)
+        img_gray, eighth_rest_imgs, eighth_rest_lower, eighth_rest_upper,
+        eighth_rest_thresh)
 
     print("Merging eighth rest image results...")
     eighth_rest_recs = merge_recs(
@@ -210,11 +214,12 @@ if __name__ == "__main__":
     for r in eighth_rest_recs:
         r.draw(eighth_rest_recs_img, (0, 0, 255), 2)
     cv2.imwrite('eighth_rest_recs_img.png', eighth_rest_recs_img)
-    open_file('eighth_rest_recs_img.png')
+    # open_file('eighth_rest_recs_img.png')
 
     print("Matching quarter rest image...")
     quarter_rest_recs = locate_images(
-        img_gray, quarter_rest_imgs, quarter_rest_lower, quarter_rest_upper, quarter_rest_thresh)
+        img_gray, quarter_rest_imgs, quarter_rest_lower, quarter_rest_upper,
+        quarter_rest_thresh)
 
     print("Merging quarter rest image results...")
     quarter_rest_recs = merge_recs(
@@ -223,11 +228,12 @@ if __name__ == "__main__":
     for r in quarter_rest_recs:
         r.draw(quarter_rest_recs_img, (0, 0, 255), 2)
     cv2.imwrite('quarter_rest_recs_img.png', quarter_rest_recs_img)
-    open_file('quarter_rest_recs_img.png')
+    # open_file('quarter_rest_recs_img.png')
 
     print("Matching half rest image...")
     half_rest_recs = locate_images(
-        img_gray, half_rest_imgs, half_rest_lower, half_rest_upper, half_rest_thresh)
+        img_gray, half_rest_imgs, half_rest_lower, half_rest_upper,
+        half_rest_thresh)
 
     print("Merging half rest image results...")
     half_rest_recs = merge_recs([j for i in half_rest_recs for j in i], 0.5)
@@ -235,11 +241,12 @@ if __name__ == "__main__":
     for r in half_rest_recs:
         r.draw(half_rest_recs_img, (0, 0, 255), 2)
     cv2.imwrite('half_rest_recs_img.png', half_rest_recs_img)
-    open_file('half_rest_recs_img.png')
+    # open_file('half_rest_recs_img.png')
 
     print("Matching whole rest image...")
     whole_rest_recs = locate_images(
-        img_gray, whole_rest_imgs, whole_rest_lower, whole_rest_upper, whole_rest_thresh)
+        img_gray, whole_rest_imgs, whole_rest_lower, whole_rest_upper,
+        whole_rest_thresh)
 
     print("Merging whole rest image results...")
     whole_rest_recs = merge_recs([j for i in whole_rest_recs for j in i], 0.5)
@@ -247,7 +254,7 @@ if __name__ == "__main__":
     for r in whole_rest_recs:
         r.draw(whole_rest_recs_img, (0, 0, 255), 2)
     cv2.imwrite('whole_rest_recs_img.png', whole_rest_recs_img)
-    open_file('whole_rest_recs_img.png')
+    # open_file('whole_rest_recs_img.png')
 
     print("Matching quarter note image...")
     quarter_recs = locate_images(
@@ -259,7 +266,7 @@ if __name__ == "__main__":
     for r in quarter_recs:
         r.draw(quarter_recs_img, (0, 0, 255), 2)
     cv2.imwrite('quarter_recs_img.png', quarter_recs_img)
-    open_file('quarter_recs_img.png')
+    # open_file('quarter_recs_img.png')
 
     print("Matching half note image...")
     half_recs = locate_images(
@@ -271,7 +278,7 @@ if __name__ == "__main__":
     for r in half_recs:
         r.draw(half_recs_img, (0, 0, 255), 2)
     cv2.imwrite('half_recs_img.png', half_recs_img)
-    open_file('half_recs_img.png')
+    # open_file('half_recs_img.png')
 
     print("Matching whole note image...")
     whole_recs = locate_images(
@@ -283,28 +290,37 @@ if __name__ == "__main__":
     for r in whole_recs:
         r.draw(whole_recs_img, (0, 0, 255), 2)
     cv2.imwrite('whole_recs_img.png', whole_recs_img)
-    open_file('whole_recs_img.png')
+    # open_file('whole_recs_img.png')
 
     note_groups = []
     for box in staff_boxes:
         staff_sharps = [Note(r, "sharp", box)
-                        for r in sharp_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                        for r in sharp_recs if abs(r.middle[1] -
+                        box.middle[1]) < box.h*5.0/8.0]
         staff_flats = [Note(r, "flat", box)
-                       for r in flat_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                       for r in flat_recs if abs(r.middle[1] -
+                       box.middle[1]) < box.h*5.0/8.0]
         eighth_rests = [Note(r, "8", box)
-                        for r in eighth_rest_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                        for r in eighth_rest_recs if abs(r.middle[1] -
+                        box.middle[1]) < box.h*5.0/8.0]
         quarter_rests = [Note(r, "4", box)
-                         for r in quarter_rest_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                         for r in quarter_rest_recs if abs(r.middle[1] -
+                         box.middle[1]) < box.h*5.0/8.0]
         half_rests = [Note(r, "2", box)
-                      for r in half_rest_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                      for r in half_rest_recs if abs(r.middle[1] -
+                      box.middle[1]) < box.h*5.0/8.0]
         whole_rests = [Note(r, "1", box)
-                       for r in whole_rest_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                       for r in whole_rest_recs if abs(r.middle[1] -
+                       box.middle[1]) < box.h*5.0/8.0]
         quarter_notes = [Note(r, "4,8", box, staff_sharps, staff_flats)
-                         for r in quarter_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                         for r in quarter_recs if abs(r.middle[1] -
+                         box.middle[1]) < box.h*5.0/8.0]
         half_notes = [Note(r, "2", box, staff_sharps, staff_flats)
-                      for r in half_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                      for r in half_recs if abs(r.middle[1] -
+                      box.middle[1]) < box.h*5.0/8.0]
         whole_notes = [Note(r, "1", box, staff_sharps, staff_flats)
-                       for r in whole_recs if abs(r.middle[1] - box.middle[1]) < box.h*5.0/8.0]
+                       for r in whole_recs if abs(r.middle[1] -
+                       box.middle[1]) < box.h*5.0/8.0]
         staff_notes = eighth_rests + quarter_rests + half_rests + \
             whole_rests + quarter_notes + half_notes + whole_notes
         staff_notes.sort(key=lambda n: n.rec.x)
@@ -315,8 +331,8 @@ if __name__ == "__main__":
         i = 0
         j = 0
         print(staff_notes)
-        while(i < len(staff_notes) and j < len(staffs)):
-            if (staff_notes[i].rec.x > staffs[j].x and j < len(staffs)):
+        while i < len(staff_notes) and j < len(staffs):
+            if staff_notes[i].rec.x > staffs[j].x and j < len(staffs):
                 r = staffs[j]
                 j += 1
                 if len(note_group) > 0:
@@ -347,7 +363,7 @@ if __name__ == "__main__":
         r.draw(img, (0, 0, 255), 2)
 
     cv2.imwrite('res.png', img)
-    open_file('res.png')
+    # open_file('res.png')
 
     for note_group in note_groups:
         print([note.note + " " + note.sym for note in note_group])
@@ -381,4 +397,4 @@ if __name__ == "__main__":
     binfile = open("output.mid", 'wb')
     midi.writeFile(binfile)
     binfile.close()
-    open_file('output.mid')
+    # open_file('output.mid')

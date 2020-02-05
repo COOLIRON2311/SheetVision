@@ -29,7 +29,7 @@ def fit(img, templates, start_percent, stop_percent, threshold):
         y.append(scale)
         # plt.plot(y, x)
         # plt.pause(0.00001)
-        if (location_count > best_location_count):
+        if location_count > best_location_count:
             best_location_count = location_count
             best_locations = locations
             best_scale = scale

@@ -87,3 +87,19 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Debug files
+flat_recs_img.png
+half_recs_img.png
+quarter_recs_img.png
+res.png
+sharp_recs_img.png
+staff_boxes_img.png
+staff_recs_img.png
+whole_recs_img.png
+eighth_rest_recs_img.png
+half_rest_recs_img.png
+natural_recs_img.png
+output.mid
+quarter_rest_recs_img.png
+whole_rest_recs_img.png
